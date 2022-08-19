@@ -1,0 +1,254 @@
+Bash scripting Commands::
+ 
+ 
+1>>..==Redirect Operators:::
+
+  ============  > To create new file
+  ============  >> To append the content
+  ============  < To provide the input
+ 
+ 
+   File descriptor::
+  
+    0 : STDIN
+	1 : STDOUT
+	2 : STDERR
+	
+	&> file.txt   For error and success out in a same file 
+	
+	&> /dev/null  For nullify the value of error and success
+	
+	
+	
+	
+	
+	
+	
+2>>..==Commands to read file content with conditions:::
+
+
+  ==============  head file.txt         By default head command display top 10 lines
+
+  ==============  head -2 file.txt      Print top 2 lines
+
+  ==============  tail file.txt         By deault it will display last 10 lines of file
+
+  ==============  tail -4 file.txt      It will display last 4 lines of file
+
+
+ 
+ 
+ 
+ 
+3>>..==Grep command:::
+
+
+  Basic usage of grep 
+  
+   ============ cat file.txt | grep "ranveer"        Searching for string ranveer
+   
+   ============ grep "ranveer" *                     Searching for string ranveer from all file at curent loaction
+   
+   ============ grep -i "ranveer"                    To ignore case sensitivity
+   
+   ============ grep -w "ranveer"                    To exact word match 
+   
+   ============ grep -r "ranveer"                    Searching for string recursively
+   
+   
+  Advanced usage of grep command
+  
+   ============ grep -E "ranveer|ravi|secret|aws_key"       To search multiple string from pattern
+   
+   ============ grep -E "^ranveer"                          Matches for the line which are starting with "ranveer"
+   
+   ============ grep -E "ranveer$"                          Matches for the line which are ending with "ranveer"
+   
+   ============ grep -E "^$"                                Matches for empty line
+   
+   ============ grep -f file test.txt                       Take search string from file, one per line
+   
+   
+      
+	
+	
+4>>..==Cut Command:::
+
+   ============ cut -c 2,3 file.txt                        If we want 2nd and third character
+   
+   ============ cut -c 2- file.txt                         If we want 2nd character to last 
+   
+   ============ cut -f 2  file.txt                         If we want 2nd field By default cut command have tab field seperator
+   
+   ============ cut -d ":" -f 1 file.txt                   Here we specify field seperator ":"
+   
+  
+  
+  
+5>>..==tr Command:::
+   
+   ============= tr '[:lower:]' '[:upper:]' < file.txt     Convert all lower case letters to upper case
+   
+   ============= tr 'i' 'I' < file.txt                     Convert "i" to "I"
+   
+   ============= tr " " "_" <file.txt                      Convert space to "_"
+   
+   ============= tr -d "="  <file.txt                      remove = form file.txt
+   
+  
+  
+
+6>>..==tee Command::: 
+
+   Using for display result and save the result in a file
+   
+   ============= cat test.txt | tee file.txt              Store result in file.txt
+   
+   ============= cat test.txt | tee -a file.txt           Append the content in file.txt
+
+   
+    
+	
+	
+7>>..==test Command:::
+     
+	For Numbers==
+	
+   ============ [[ int1 -eq int2 ]]                      It return true if they equal else false
+	
+   ============ [[ int1 -ne int2 ]]                      It return true if they are not equal else false
+	
+   ============ [[ int1 -lt int2 ]]                      It return true if int1 is less then int2
+	
+   ============ [[ int1 -le int2 ]]                      It return true if int1 is less then or equal to int2
+	
+   ============ [[ int1 -gt int2 ]]                      It return true if int1 is greater then int2
+	
+   ============ [[ int1 -ge int2 ]]                      It return true if int1 is greater then or equal to int2
+	
+   ============ [[ ! int1 -eq int2 ]]                    It reverse the result
+	
+	For strings==
+	
+   ============ [[ -z str ]]                             It return true if lenght of string is zero
+	
+   ============ [[ -n str ]]                             It return true if lenght of string is non zero
+	
+   ============ [[ str1 == str2 ]]                       It return true if both the strings are equal
+	
+   ============ [[ str1!=str2 ]]                         It return true if both are not equal
+	
+	
+	
+
+
+8>>..==Command Chaining Operators:::
+
+   =========== cmd1;cmd2                    Run cmd1 and then cmd2 , regardless of failer or success of cmd1
+   
+   =========== cmd1 && cmd2                 Run cmd2 only when cmd1 is succeeded
+   
+   =========== cmd1 || cmd2                 Run cmd2 only when cmd1 is failed
+   
+   =========== cmd1 && cmd2 || cmd3         Run cmd2 if cmd1 is success else run cmd3
+   
+   =========== cmd1 && cmd2                 Logical AND operator will compare two input & both return true then ,it will return true
+   
+   =========== cmd1 || cmd2                 Logical NOT operator will return true if then any of them return true else return false
+   
+   
+   
+   
+	
+9>>..== awk Command:::
+    
+   In awk by default space is field seperator	
+   
+   ========== awk '{ print $1 }' file.txt                 Print first field of file of all line
+   
+   ========== awk '{ print $1,$3,$4 }' file.txt           Print 1st 2nd and 4rth field of file
+   
+   ========== awk 'NR==3 { print $3 }' file.txt           Print 3rd field from 3rd line of file
+   
+   ========== awk '{ print NR }' file.txt                 Print every line number of file
+   
+   ========== awk '{ print NF }' file.txt                 Print how many field in every line
+   
+   ========== awk 'NR>=4 { print $3 }' file.txt           Print 3rd field line number greater then or equal to 4
+   
+   ========== awk 'NR<=8 { print $1 }' file.txt           Print 1st field line number less then or equal to 8
+   
+   ========== awk '{ print $NF }'                         Print last field of every line of file
+   
+   ========== awk -F ":" '{ print $3 }' file.txt          Print 3rd field where field seperator is ":"
+   
+   
+	
+	
+10>>..== sed Command:::
+
+   ========== sed -n '3p' file.txt                  Print 3rd line of file
+   
+   ========== sed -n '$p' file.txt                  Print last line of file
+   
+   ========== sed -n '2,5p' file.txt                Print 2nd to 5th line of file
+   
+   ========== sed -n '3,+3p' file.txt               Print from 3rd line and print three line of file
+   
+   ========== sed -n '1~3p' file.txt                Print lines with the gap 2
+   
+   ========== sed '3d' file.txt                     Print all line exept 3rd line
+   
+   ========== sed '/echo/d' file.txt                Delete the line which have word "echo"
+   
+   ========== sed '2,5d' file.txt                   Print all lines exept 2-5th line
+   
+   ========== sed -i '2,5d' file.txt                It changed the orignal file 
+   
+   ========== sed -i.back '2,5d' file.txt           It changed original file and also  take backup
+   
+   ========== sed -n '/bin/p' file.txt              Print the line which are having "bin"
+   
+   ========== sed -n -e '/echo/p' -e '/rav/p' file  Print the lines which are having either "echo" or "rav"
+   
+   ========== sed '/echo/!d' file.txt               Delete the line which are not having "echo"
+   
+   ========== sed 's/root/ravi/g' file.txt          Replace the word  root with ravi globaly
+   
+   ========== sed 's/daemon/root/2' file.txt        Replace daemon with root only when it ocur second time in same line
+   
+   ========== sed '/dev/s/bin/bash/' file.txt       If line consist of "dev" where replace "bin" with "bash"
+   
+   ========== sed '2i New line is inserted' file    Insert new line before 2nd line 
+   
+   ========== sed '2a New line is inserted' file    Insert new line after 2nd line
+   
+   ========== sed '/ravi/a New line inseted' file   Insert new line after line which have word "ravi"
+   
+   ========== sed -n '/p[ou]t/p' file.txt           Print line which have word put and pot
+   
+   ========== sed -n '/\s/p' file.txt               Print the line which have space
+   
+   ========== sed -n '/\t/p' file.txt               Print the line which are having tab
+   
+   ========== sed -n '/p..t/p' file.txt             Print the line which have four character word start with p and end with t 
+   
+   ========== sed -n '/this*/p' file.txt            s* means s may be 0 times or more then zero time
+
+   ========== sed -n '/this\+/p' file.txt           s atleast one time or more then    
+   
+   ========== sed -n '/this\?/p' file.txt           s amy be 0 time or one time
+   
+   ========== sed -n '/^ravi/p' file.txt            Print the line which have ravi in start
+   
+   ========== sed -n '/ravi$/p' file.txt            Print the line which have word ravi at last
+   
+
+
+
+
+
+   
+   
+   
+ 
